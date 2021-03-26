@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:intro_slider/scrollbar_behavior_enum.dart';
 
 //import 'package:intro_slider_example/home.dart';
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class IntroScreen extends StatefulWidget {
-  IntroScreen({Key key}) : super(key: key);
+  IntroScreen({Key? key}) : super(key: key);
 
   @override
   IntroScreenState createState() => new IntroScreenState();
@@ -155,9 +154,9 @@ class IntroScreen extends StatefulWidget {
 
 //------------------ Custom your own tabs ------------------
 class IntroScreenState extends State<IntroScreen> {
-  List<Slide> slides = new List();
+  List<Slide> slides = [];
 
-  Function goToTab;
+  late Function goToTab;
 
   @override
   void initState() {
@@ -251,7 +250,7 @@ class IntroScreenState extends State<IntroScreen> {
   }
 
   List<Widget> renderListCustomTabs() {
-    List<Widget> tabs = new List();
+    List<Widget> tabs = [];
     for (int i = 0; i < slides.length; i++) {
       Slide currentSlide = slides[i];
       tabs.add(Container(
@@ -263,14 +262,14 @@ class IntroScreenState extends State<IntroScreen> {
             children: <Widget>[
               GestureDetector(
                   child: Image.asset(
-                currentSlide.pathImage,
+                currentSlide.pathImage!,
                 width: 200.0,
                 height: 200.0,
                 fit: BoxFit.contain,
               )),
               Container(
                 child: Text(
-                  currentSlide.title,
+                  currentSlide.title!,
                   style: currentSlide.styleTitle,
                   textAlign: TextAlign.center,
                 ),
@@ -278,7 +277,7 @@ class IntroScreenState extends State<IntroScreen> {
               ),
               Container(
                 child: Text(
-                  currentSlide.description,
+                  currentSlide.description!,
                   style: currentSlide.styleDescription,
                   textAlign: TextAlign.center,
                   maxLines: 5,

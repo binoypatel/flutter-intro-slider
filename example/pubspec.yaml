@@ -4,7 +4,7 @@ description: Demonstrates how to use the intro_slider plugin.
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -13,6 +13,9 @@ dev_dependencies:
   intro_slider:
     path: ../
 
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.12.0 <2.0.0"
 
 flutter:
 
