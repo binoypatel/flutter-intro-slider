@@ -207,7 +207,7 @@ class IntroSlider extends StatefulWidget {
     this.scrollPhysics,
     this.shouldHideStatusBar,
     this.verticalScrollbarBehavior,
-  });
+  }) : super(key: key);
 
   @override
   IntroSliderState createState() {
@@ -778,7 +778,6 @@ class IntroSliderState extends State<IntroSlider>
         child: Stack(
           children: <Widget>[
             TabBarView(
-              key: widget.key,
               children: tabs!,
               controller: tabController,
               physics: isScrollable!
