@@ -10,6 +10,7 @@ import 'scrollbar_behavior_enum.dart';
 import 'slide_object.dart';
 
 class IntroSlider extends StatefulWidget {
+  final Key? key;
   // ---------- Slides ----------
   /// An array of Slide object
   final List<Slide>? slides;
@@ -147,6 +148,7 @@ class IntroSlider extends StatefulWidget {
 
   // Constructor
   IntroSlider({
+    this.key,
     // Slides
     this.slides,
     this.backgroundColorAllSlides,
@@ -776,6 +778,7 @@ class IntroSliderState extends State<IntroSlider>
         child: Stack(
           children: <Widget>[
             TabBarView(
+              key: widget.key,
               children: tabs!,
               controller: tabController,
               physics: isScrollable!
