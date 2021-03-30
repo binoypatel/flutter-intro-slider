@@ -28,6 +28,7 @@ flutter:
     - images/photo_school.png
     - images/photo_museum.png
     - images/photo_coffee_shop.png
+    - images/result.svg
 
 
   fonts:

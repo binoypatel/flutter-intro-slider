@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'dot_animation_enum.dart';
 import 'list_rtl_language.dart';
@@ -146,132 +147,140 @@ class IntroSlider extends StatefulWidget {
   /// The way the vertical scrollbar should behave
   final scrollbarBehavior? verticalScrollbarBehavior;
 
+  // Bottom widget
+  final Widget? bottomWidget;
+
   // Constructor
-  IntroSlider({
-    this.key,
-    // Slides
-    this.slides,
-    this.backgroundColorAllSlides,
+  IntroSlider(
+      {this.key,
+      // Slides
+      this.slides,
+      this.backgroundColorAllSlides,
 
-    // Skip
-    this.renderSkipBtn,
-    this.widthSkipBtn,
-    this.onSkipPress,
-    this.nameSkipBtn,
-    this.styleNameSkipBtn,
-    this.colorSkipBtn,
-    this.highlightColorSkipBtn,
-    this.isShowSkipBtn,
-    this.borderRadiusSkipBtn,
+      // Skip
+      this.renderSkipBtn,
+      this.widthSkipBtn,
+      this.onSkipPress,
+      this.nameSkipBtn,
+      this.styleNameSkipBtn,
+      this.colorSkipBtn,
+      this.highlightColorSkipBtn,
+      this.isShowSkipBtn,
+      this.borderRadiusSkipBtn,
 
-    // Prev
-    this.renderPrevBtn,
-    this.widthPrevBtn,
-    this.namePrevBtn,
-    this.isShowPrevBtn,
-    this.styleNamePrevBtn,
-    this.colorPrevBtn,
-    this.highlightColorPrevBtn,
-    this.borderRadiusPrevBtn,
+      // Prev
+      this.renderPrevBtn,
+      this.widthPrevBtn,
+      this.namePrevBtn,
+      this.isShowPrevBtn,
+      this.styleNamePrevBtn,
+      this.colorPrevBtn,
+      this.highlightColorPrevBtn,
+      this.borderRadiusPrevBtn,
 
-    // Done
-    this.renderDoneBtn,
-    this.widthDoneBtn,
-    this.onDonePress,
-    this.nameDoneBtn,
-    this.colorDoneBtn,
-    this.highlightColorDoneBtn,
-    this.borderRadiusDoneBtn,
-    this.styleNameDoneBtn,
-    this.isShowDoneBtn,
+      // Done
+      this.renderDoneBtn,
+      this.widthDoneBtn,
+      this.onDonePress,
+      this.nameDoneBtn,
+      this.colorDoneBtn,
+      this.highlightColorDoneBtn,
+      this.borderRadiusDoneBtn,
+      this.styleNameDoneBtn,
+      this.isShowDoneBtn,
 
-    // Next
-    this.renderNextBtn,
-    this.nameNextBtn,
-    this.isShowNextBtn,
+      // Next
+      this.renderNextBtn,
+      this.nameNextBtn,
+      this.isShowNextBtn,
 
-    // Dots
-    this.isShowDotIndicator,
-    this.colorDot,
-    this.colorActiveDot,
-    this.sizeDot,
-    this.typeDotAnimation = dotSliderAnimation.DOT_MOVEMENT,
+      // Dots
+      this.isShowDotIndicator,
+      this.colorDot,
+      this.colorActiveDot,
+      this.sizeDot,
+      this.typeDotAnimation = dotSliderAnimation.DOT_MOVEMENT,
 
-    // Tabs
-    this.listCustomTabs,
-    this.onTabChangeCompleted,
-    this.refFuncGoToTab,
+      // Tabs
+      this.listCustomTabs,
+      this.onTabChangeCompleted,
+      this.refFuncGoToTab,
 
-    // Behavior
-    this.isScrollable,
-    this.scrollPhysics,
-    this.shouldHideStatusBar,
-    this.verticalScrollbarBehavior,
-  }) : super(key: key);
+      // Behavior
+      this.isScrollable,
+      this.scrollPhysics,
+      this.shouldHideStatusBar,
+      this.verticalScrollbarBehavior,
+
+      // bottom widget
+      this.bottomWidget})
+      : super(key: key);
 
   @override
   IntroSliderState createState() {
     return new IntroSliderState(
-      // Slides
-      slides: this.slides,
-      backgroundColorAllSlides: this.backgroundColorAllSlides,
+        // Slides
+        slides: this.slides,
+        backgroundColorAllSlides: this.backgroundColorAllSlides,
 
-      // Skip
-      renderSkipBtn: this.renderSkipBtn,
-      widthSkipBtn: this.widthSkipBtn,
-      onSkipPress: this.onSkipPress,
-      nameSkipBtn: this.nameSkipBtn,
-      styleNameSkipBtn: this.styleNameSkipBtn,
-      colorSkipBtn: this.colorSkipBtn,
-      highlightColorSkipBtn: this.highlightColorSkipBtn,
-      isShowSkipBtn: this.isShowSkipBtn,
-      borderRadiusSkipBtn: this.borderRadiusSkipBtn,
+        // Skip
+        renderSkipBtn: this.renderSkipBtn,
+        widthSkipBtn: this.widthSkipBtn,
+        onSkipPress: this.onSkipPress,
+        nameSkipBtn: this.nameSkipBtn,
+        styleNameSkipBtn: this.styleNameSkipBtn,
+        colorSkipBtn: this.colorSkipBtn,
+        highlightColorSkipBtn: this.highlightColorSkipBtn,
+        isShowSkipBtn: this.isShowSkipBtn,
+        borderRadiusSkipBtn: this.borderRadiusSkipBtn,
 
-      // Prev
-      renderPrevBtn: this.renderPrevBtn,
-      widthPrevBtn: this.widthPrevBtn,
-      namePrevBtn: this.namePrevBtn,
-      isShowPrevBtn: this.isShowPrevBtn,
-      styleNamePrevBtn: this.styleNamePrevBtn,
-      colorPrevBtn: this.colorPrevBtn,
-      highlightColorPrevBtn: this.highlightColorPrevBtn,
-      borderRadiusPrevBtn: this.borderRadiusPrevBtn,
+        // Prev
+        renderPrevBtn: this.renderPrevBtn,
+        widthPrevBtn: this.widthPrevBtn,
+        namePrevBtn: this.namePrevBtn,
+        isShowPrevBtn: this.isShowPrevBtn,
+        styleNamePrevBtn: this.styleNamePrevBtn,
+        colorPrevBtn: this.colorPrevBtn,
+        highlightColorPrevBtn: this.highlightColorPrevBtn,
+        borderRadiusPrevBtn: this.borderRadiusPrevBtn,
 
-      // Done
-      renderDoneBtn: this.renderDoneBtn,
-      widthDoneBtn: this.widthDoneBtn,
-      onDonePress: this.onDonePress,
-      nameDoneBtn: this.nameDoneBtn,
-      styleNameDoneBtn: this.styleNameDoneBtn,
-      colorDoneBtn: this.colorDoneBtn,
-      highlightColorDoneBtn: this.highlightColorDoneBtn,
-      borderRadiusDoneBtn: this.borderRadiusDoneBtn,
-      isShowDoneBtn: this.isShowDoneBtn,
+        // Done
+        renderDoneBtn: this.renderDoneBtn,
+        widthDoneBtn: this.widthDoneBtn,
+        onDonePress: this.onDonePress,
+        nameDoneBtn: this.nameDoneBtn,
+        styleNameDoneBtn: this.styleNameDoneBtn,
+        colorDoneBtn: this.colorDoneBtn,
+        highlightColorDoneBtn: this.highlightColorDoneBtn,
+        borderRadiusDoneBtn: this.borderRadiusDoneBtn,
+        isShowDoneBtn: this.isShowDoneBtn,
 
-      // Next
-      renderNextBtn: this.renderNextBtn,
-      nameNextBtn: this.nameNextBtn,
-      isShowNextBtn: this.isShowNextBtn,
+        // Next
+        renderNextBtn: this.renderNextBtn,
+        nameNextBtn: this.nameNextBtn,
+        isShowNextBtn: this.isShowNextBtn,
 
-      // Dots
-      isShowDotIndicator: this.isShowDotIndicator,
-      colorDot: this.colorDot,
-      colorActiveDot: this.colorActiveDot,
-      sizeDot: this.sizeDot,
-      typeDotAnimation: this.typeDotAnimation,
+        // Dots
+        isShowDotIndicator: this.isShowDotIndicator,
+        colorDot: this.colorDot,
+        colorActiveDot: this.colorActiveDot,
+        sizeDot: this.sizeDot,
+        typeDotAnimation: this.typeDotAnimation,
 
-      // Tabs
-      listCustomTabs: this.listCustomTabs,
-      onTabChangeCompleted: this.onTabChangeCompleted,
-      refFuncGoToTab: this.refFuncGoToTab,
+        // Tabs
+        listCustomTabs: this.listCustomTabs,
+        onTabChangeCompleted: this.onTabChangeCompleted,
+        refFuncGoToTab: this.refFuncGoToTab,
 
-      // Behavior
-      isScrollable: this.isScrollable,
-      scrollPhysics: this.scrollPhysics,
-      shouldHideStatusBar: this.shouldHideStatusBar,
-      verticalScrollbarBehavior:
-          this.verticalScrollbarBehavior ?? scrollbarBehavior.HIDE,
-    );
+        // Behavior
+        isScrollable: this.isScrollable,
+        scrollPhysics: this.scrollPhysics,
+        shouldHideStatusBar: this.shouldHideStatusBar,
+        verticalScrollbarBehavior:
+            this.verticalScrollbarBehavior ?? scrollbarBehavior.HIDE,
+
+        // bottom widget
+        bottomWidget: this.bottomWidget);
   }
 }
 
@@ -421,6 +430,9 @@ class IntroSliderState extends State<IntroSlider>
   /// The way the vertical scrollbar should behave
   final scrollbarBehavior verticalScrollbarBehavior;
 
+  /// Bottom
+  final Widget? bottomWidget;
+
   // Constructor
   IntroSliderState({
     // List slides
@@ -481,6 +493,9 @@ class IntroSliderState extends State<IntroSlider>
     required this.scrollPhysics,
     required this.shouldHideStatusBar,
     required this.verticalScrollbarBehavior,
+
+    // Sign-up & Sign-in
+    required this.bottomWidget,
   });
 
   TabController? tabController;
@@ -876,73 +891,80 @@ class IntroSliderState extends State<IntroSlider>
 
   Widget renderBottom() {
     return Positioned(
-      child: Row(
-        children: <Widget>[
-          // Skip button
-          Container(
-            alignment: Alignment.center,
-            child: isShowSkipBtn!
-                ? buildSkipButton()
-                : (isShowPrevBtn! ? buildPrevButton() : Container()),
-            width: isShowSkipBtn!
-                ? widthSkipBtn ?? MediaQuery.of(context).size.width / 4
-                : (isShowPrevBtn!
-                    ? widthPrevBtn
-                    : MediaQuery.of(context).size.width / 4),
-          ),
+      child: Column(
+        children: [
+          Row(
+            children: <Widget>[
+              // Skip button
+              Container(
+                alignment: Alignment.center,
+                child: isShowSkipBtn!
+                    ? buildSkipButton()
+                    : (isShowPrevBtn! ? buildPrevButton() : Container()),
+                width: isShowSkipBtn!
+                    ? widthSkipBtn ?? MediaQuery.of(context).size.width / 4
+                    : (isShowPrevBtn!
+                        ? widthPrevBtn
+                        : MediaQuery.of(context).size.width / 4),
+              ),
 
-          // Dot indicator
-          Flexible(
-            child: isShowDotIndicator!
-                ? Container(
-                    child: Stack(
-                      children: <Widget>[
-                        Row(
-                          children: this.renderListDots(),
-                          mainAxisAlignment: MainAxisAlignment.center,
+              // Dot indicator
+              Flexible(
+                child: isShowDotIndicator!
+                    ? Container(
+                        child: Stack(
+                          children: <Widget>[
+                            Row(
+                              children: this.renderListDots(),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                            typeDotAnimation == dotSliderAnimation.DOT_MOVEMENT
+                                ? Center(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: colorActiveDot,
+                                          borderRadius: BorderRadius.circular(
+                                              sizeDot! / 2)),
+                                      width: sizeDot,
+                                      height: sizeDot,
+                                      margin: EdgeInsets.only(
+                                          left: this.isRTLLanguage(
+                                                  Localizations.localeOf(
+                                                          context)
+                                                      .languageCode)
+                                              ? marginRightDotFocused
+                                              : marginLeftDotFocused,
+                                          right: this.isRTLLanguage(
+                                                  Localizations.localeOf(
+                                                          context)
+                                                      .languageCode)
+                                              ? marginLeftDotFocused
+                                              : marginRightDotFocused),
+                                    ),
+                                  )
+                                : Container()
+                          ],
                         ),
-                        typeDotAnimation == dotSliderAnimation.DOT_MOVEMENT
-                            ? Center(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: colorActiveDot,
-                                      borderRadius:
-                                          BorderRadius.circular(sizeDot! / 2)),
-                                  width: sizeDot,
-                                  height: sizeDot,
-                                  margin: EdgeInsets.only(
-                                      left: this.isRTLLanguage(
-                                              Localizations.localeOf(context)
-                                                  .languageCode)
-                                          ? marginRightDotFocused
-                                          : marginLeftDotFocused,
-                                      right: this.isRTLLanguage(
-                                              Localizations.localeOf(context)
-                                                  .languageCode)
-                                          ? marginLeftDotFocused
-                                          : marginRightDotFocused),
-                                ),
-                              )
-                            : Container()
-                      ],
-                    ),
-                  )
-                : Container(),
-          ),
-
-          // Next, Done button
-          Container(
-            alignment: Alignment.center,
-            child: tabController!.index + 1 == lengthSlide
-                ? isShowDoneBtn!
-                    ? buildDoneButton()
-                    : Container()
-                : isShowNextBtn!
-                    ? buildNextButton()
+                      )
                     : Container(),
-            width: widthDoneBtn ?? MediaQuery.of(context).size.width / 4,
-            height: 50,
+              ),
+
+              // Next, Done button
+              Container(
+                alignment: Alignment.center,
+                child: tabController!.index + 1 == lengthSlide
+                    ? isShowDoneBtn!
+                        ? buildDoneButton()
+                        : Container()
+                    : isShowNextBtn!
+                        ? buildNextButton()
+                        : Container(),
+                width: widthDoneBtn ?? MediaQuery.of(context).size.width / 4,
+                height: 50,
+              ),
+            ],
           ),
+          if (bottomWidget != null) bottomWidget!,
         ],
       ),
       bottom: 10.0,
@@ -1084,51 +1106,66 @@ class IntroSliderState extends State<IntroSlider>
         ),
       ],
     );
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: backgroundImage != null
-          ? BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(backgroundImage),
-                fit: backgroundImageFit ?? BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  backgroundOpacityColor != null
-                      ? backgroundOpacityColor
-                          .withOpacity(backgroundOpacity ?? 0.5)
-                      : Colors.black.withOpacity(backgroundOpacity ?? 0.5),
-                  backgroundBlendMode ?? BlendMode.darken,
-                ),
-              ),
-            )
-          : BoxDecoration(
-              gradient: LinearGradient(
-                colors: backgroundColor != null
-                    ? [backgroundColor, backgroundColor]
-                    : [
-                        colorBegin ?? Colors.amberAccent,
-                        colorEnd ?? Colors.amberAccent
-                      ],
-                begin: directionColorBegin ?? Alignment.topLeft,
-                end: directionColorEnd ?? Alignment.bottomRight,
-              ),
+    return Stack(
+      children: [
+        if (backgroundImage != null && backgroundImage.endsWith('.svg'))
+          Align(
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              backgroundImage,
+              fit: backgroundImageFit ?? BoxFit.cover,
             ),
-      child: Container(
-        margin: EdgeInsets.only(bottom: 60.0),
-        child: this.verticalScrollbarBehavior != scrollbarBehavior.HIDE
-            ? Platform.isIOS
-                ? CupertinoScrollbar(
-                    child: listView,
-                    controller: scrollController,
-                    isAlwaysShown: this.verticalScrollbarBehavior ==
-                        scrollbarBehavior.SHOW_ALWAYS)
-                : Scrollbar(
-                    child: listView,
-                    controller: scrollController,
-                    isAlwaysShown: this.verticalScrollbarBehavior ==
-                        scrollbarBehavior.SHOW_ALWAYS)
-            : listView,
-      ),
+          ),
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: backgroundImage != null &&
+                  !backgroundImage.endsWith('.svg')
+              ? BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(backgroundImage),
+                    fit: backgroundImageFit ?? BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      backgroundOpacityColor != null
+                          ? backgroundOpacityColor
+                              .withOpacity(backgroundOpacity ?? 0.5)
+                          : Colors.black.withOpacity(backgroundOpacity ?? 0.5),
+                      backgroundBlendMode ?? BlendMode.darken,
+                    ),
+                  ),
+                )
+              : backgroundColor != null || colorBegin != null
+                  ? BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: backgroundColor != null
+                            ? [backgroundColor, backgroundColor]
+                            : [
+                                colorBegin ?? Colors.amberAccent,
+                                colorEnd ?? Colors.amberAccent
+                              ],
+                        begin: directionColorBegin ?? Alignment.topLeft,
+                        end: directionColorEnd ?? Alignment.bottomRight,
+                      ),
+                    )
+                  : null,
+          child: Container(
+            margin: EdgeInsets.only(bottom: 60.0),
+            child: this.verticalScrollbarBehavior != scrollbarBehavior.HIDE
+                ? Platform.isIOS
+                    ? CupertinoScrollbar(
+                        child: listView,
+                        controller: scrollController,
+                        isAlwaysShown: this.verticalScrollbarBehavior ==
+                            scrollbarBehavior.SHOW_ALWAYS)
+                    : Scrollbar(
+                        child: listView,
+                        controller: scrollController,
+                        isAlwaysShown: this.verticalScrollbarBehavior ==
+                            scrollbarBehavior.SHOW_ALWAYS)
+                : listView,
+          ),
+        ),
+      ],
     );
   }
 
