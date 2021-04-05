@@ -1056,24 +1056,26 @@ class IntroSliderState extends State<IntroSlider>
     final listView = ListView(
       controller: scrollController,
       children: <Widget>[
-        Container(
-          // Title
-          child: widgetTitle ??
-              Text(
-                title ?? "",
-                style: styleTitle ??
-                    TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30.0,
-                    ),
-                maxLines: maxLineTitle != null ? maxLineTitle : 1,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-              ),
-          margin: marginTitle ??
-              EdgeInsets.only(top: 70.0, bottom: 50.0, left: 20.0, right: 20.0),
-        ),
+        if (title != null && title.isNotEmpty)
+          Container(
+            // Title
+            child: widgetTitle ??
+                Text(
+                  title,
+                  style: styleTitle ??
+                      TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30.0,
+                      ),
+                  maxLines: maxLineTitle != null ? maxLineTitle : 1,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
+            margin: marginTitle ??
+                EdgeInsets.only(
+                    top: 70.0, bottom: 50.0, left: 20.0, right: 20.0),
+          ),
 
         // Image or Center widget
         GestureDetector(
